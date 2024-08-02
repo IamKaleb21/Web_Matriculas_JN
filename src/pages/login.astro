@@ -14,7 +14,7 @@ import Layout from "../layouts/Layout.astro";
       <div class="flex justify-center">
         <img src="/public/logo.svg" alt="Logo" class="w-64 h-56" />
       </div>
-      <form id="loginForm" class="mt-8 space-y-2" method="POST" action="/api/login">
+      <form id="loginForm" class="mt-8 space-y-2">
         <div class="rounded-md shadow-sm my-12">
           <div>
             <label for="username" class="sr-only">Nombre de usuario</label>
@@ -41,6 +41,7 @@ import Layout from "../layouts/Layout.astro";
             />
           </div>
         </div>
+        <div id="errorMessage" class="text-red-500 text-sm hidden"></div>
         <div>
           <button
             type="button"
@@ -66,4 +67,29 @@ import Layout from "../layouts/Layout.astro";
       </form>
     </div>
   </main>
+  <script type="module">
+    /**
+     * @param {Event} event
+     */
+    async function handleLogin(event) {
+      event.preventDefault();
+      const form = document.getElementById('loginForm');
+      const formData = new FormData(form);
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        body: formData,
+      });
+      const result = await response.json();
+      const errorMessage = document.getElementById('errorMessage');
+
+      if (result.success) {
+        window.location.href = '/dashboard'; // Redirige al usuario a la página de destino
+      } else {
+        errorMessage.textContent = result.message;
+        errorMessage.classList.remove('hidden');
+      }
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', handleLogin);
+  </script>
 </Layout>
