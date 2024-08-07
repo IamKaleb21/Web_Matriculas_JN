@@ -1,0 +1,138 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Registro Sistema Matrículas">
+  <main class="bg-gray-100">
+    <div class="container mx-auto p-4">
+      <h1 class="text-3xl font-bold mb-2">Matrícula</h1>
+      <p class="text-gray-600 mb-4">Ingresa la información de tu estudiante para completar la matrícula.</p>
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <h2 class="text-xl font-semibold mb-4">Formulario de Matrícula</h2>
+        <form class="space-y-6" onsubmit="handleSubmit(event)">
+          <fieldset class="border border-gray-200 p-4 rounded-md">
+            <legend class="text-lg font-semibold">Datos Apoderado</legend>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+              <div>
+                <label for="apoderado-nombres" class="block text-sm font-medium text-gray-700">Nombres</label>
+                <input type="text" id="apoderado-nombres" name="apoderado-nombres" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Ingresar nombres del apoderado">
+              </div>
+              <div>
+                <label for="apoderado-apellidos" class="block text-sm font-medium text-gray-700">Apellidos</label>
+                <input type="text" id="apoderado-apellidos" name="apoderado-apellidos" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Ingresar apellidos del apoderado">
+              </div>
+              <div>
+                <label for="apoderado-telefono" class="block text-sm font-medium text-gray-700">Teléfono</label>
+                <input type="text" id="apoderado-telefono" name="apoderado-telefono" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Ingresar número telefónico del apoderado">
+              </div>
+              <div>
+                <label for="apoderado-direccion" class="block text-sm font-medium text-gray-700">Dirección</label>
+                <input type="text" id="apoderado-direccion" name="apoderado-direccion" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Ingresar dirección del apoderado">
+              </div>
+              <div>
+                <label for="apoderado-dni" class="block text-sm font-medium text-gray-700">DNI / Carné de Extranjería</label>
+                <input type="text" id="apoderado-dni" name="apoderado-dni" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Ingresar DNI del apoderado">
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="border border-gray-200 p-4 rounded-md">
+            <legend class="text-lg font-semibold">Datos Estudiante</legend>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+              <div>
+                <label for="estudiante-nombres" class="block text-sm font-medium text-gray-700">Nombres</label>
+                <input type="text" id="estudiante-nombres" name="estudiante-nombres" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Ingresar nombres del estudiante">
+              </div>
+              <div>
+                <label for="estudiante-apellidos" class="block text-sm font-medium text-gray-700">Apellidos</label>
+                <input type="text" id="estudiante-apellidos" name="estudiante-apellidos" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Ingresar apellidos del estudiante">
+              </div>
+              <div>
+                <label for="estudiante-fecha-nacimiento" class="block text-sm font-medium text-gray-700">Fecha de Nacimiento</label>
+                <input type="date" id="estudiante-fecha-nacimiento" name="estudiante-fecha-nacimiento" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" value="2024-03-10">
+              </div>
+              <div>
+                <label for="estudiante-grado" class="block text-sm font-medium text-gray-700">Grado</label>
+                <select id="estudiante-grado" name="estudiante-grado" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                  <option value="" disabled selected>Seleccionar Grado del Estudiante</option>
+                  <option>4 Años</option>
+                  <option>5 Años</option>
+                  <option>1ro Primaria</option>
+                  <option>2do Primaria</option>
+                  <option>3ro Primaria</option>
+                  <option>4to Primaria</option>
+                  <option>5to Primaria</option>
+                  <option>6to Primaria</option>
+                  <option>1ro Secundaria</option>
+                  <option>2do Secundaria</option>
+                  <option>3ro Secundaria</option>
+                  <option>4to Secundaria</option>
+                  <option>5to Secundaria</option>
+                </select>
+              </div>
+              <div>
+                <label for="estudiante-seccion" class="block text-sm font-medium text-gray-700">Sección</label>
+                <select id="estudiante-seccion" name="estudiante-seccion" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                  <option value="" disabled selected>Seleccionar Sección del Estudiante</option>
+                  <option>A</option>
+                  <option>B</option>
+                </select>
+              </div>
+              <div>
+                <label for="estudiante-dni" class="block text-sm font-medium text-gray-700">DNI / Carné de Extranjería</label>
+                <input type="text" id="estudiante-dni" name="estudiante-dni" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Ingresar DNI del estudiante">
+              </div>
+              <div>
+                <label for="estudiante-nacionalidad" class="block text-sm font-medium text-gray-700">Nacionalidad</label>
+                <select id="estudiante-nacionalidad" name="estudiante-nacionalidad" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                  <option value="" disabled selected>Seleccionar la Nacionalidad del Estudiante</option>
+                  <option>Argentina</option>
+                  <option>Bolivia</option>
+                  <option>Brasil</option>
+                  <option>Chile</option>
+                  <option>Colombia</option>
+                  <option>Ecuador</option>
+                  <option>Paraguay</option>
+                  <option>Uruguay</option>
+                  <option>Venezuela</option>
+                  <option>Otro</option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
+          <div class="flex justify-center">
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Registrar Matrícula</button>
+          </div>
+        </form>
+        <div id="successMessage" class="text-green-500 text-sm hidden mt-4"></div>
+        <div id="errorMessage" class="text-red-500 text-sm hidden mt-4"></div>
+      </div>
+    </div>
+  </main>
+  <script type="module">
+    /**
+     * @param {Event} event
+     */
+    async function handleSubmit(event) {
+      event.preventDefault();
+      const form = document.querySelector('form');
+      const formData = new FormData(form);
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        body: formData,
+      });
+      const result = await response.json();
+      const successMessage = document.getElementById('successMessage');
+      const errorMessage = document.getElementById('errorMessage');
+
+      if (result.success) {
+        successMessage.textContent = result.message;
+        successMessage.classList.remove('hidden');
+        errorMessage.classList.add('hidden');
+      } else {
+        errorMessage.textContent = result.message;
+        errorMessage.classList.remove('hidden');
+        successMessage.classList.add('hidden');
+      }
+    }
+  </script>
+</Layout>
