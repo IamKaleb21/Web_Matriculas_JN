@@ -9,7 +9,7 @@ import Layout from "../layouts/Layout.astro";
       <p class="text-gray-600 mb-4">Ingresa la información de tu estudiante para completar la matrícula.</p>
       <div class="bg-white shadow-md rounded-lg p-6">
         <h2 class="text-xl font-semibold mb-4">Formulario de Matrícula</h2>
-        <form class="space-y-6" onsubmit="handleSubmit(event)">
+        <form id="matriculaForm" class="space-y-6">
           <fieldset class="border border-gray-200 p-4 rounded-md">
             <legend class="text-lg font-semibold">Datos Apoderado</legend>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
@@ -94,6 +94,7 @@ import Layout from "../layouts/Layout.astro";
                   <option>Paraguay</option>
                   <option>Uruguay</option>
                   <option>Venezuela</option>
+                  <option>Peruana</option>
                   <option>Otro</option>
                 </select>
               </div>
@@ -109,30 +110,41 @@ import Layout from "../layouts/Layout.astro";
     </div>
   </main>
   <script type="module">
-    /**
-     * @param {Event} event
-     */
     async function handleSubmit(event) {
-      event.preventDefault();
-      const form = document.querySelector('form');
+      event.preventDefault(); // Esto debería prevenir la recarga de la página
+  
+      const form = document.getElementById('matriculaForm');
       const formData = new FormData(form);
-      const response = await fetch('/api/register', {
-        method: 'POST',
-        body: formData,
-      });
-      const result = await response.json();
-      const successMessage = document.getElementById('successMessage');
-      const errorMessage = document.getElementById('errorMessage');
-
-      if (result.success) {
-        successMessage.textContent = result.message;
-        successMessage.classList.remove('hidden');
-        errorMessage.classList.add('hidden');
-      } else {
-        errorMessage.textContent = result.message;
+  
+      try {
+        const response = await fetch('/api/register', {
+          method: 'POST',
+          body: formData,
+        });
+  
+        const result = await response.json();
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+  
+        if (result.success) {
+          successMessage.textContent = result.message;
+          successMessage.classList.remove('hidden');
+          errorMessage.classList.add('hidden');
+          form.reset(); // Limpiar el formulario después de un envío exitoso
+        } else {
+          errorMessage.textContent = result.message;
+          errorMessage.classList.remove('hidden');
+          successMessage.classList.add('hidden');
+        }
+      } catch (error) {
+        console.error('Error al enviar los datos:', error);
+        errorMessage.textContent = 'Error en la conexión con el servidor.';
         errorMessage.classList.remove('hidden');
         successMessage.classList.add('hidden');
       }
     }
+  
+    document.getElementById('matriculaForm').addEventListener('submit', handleSubmit);
   </script>
+  
 </Layout>
